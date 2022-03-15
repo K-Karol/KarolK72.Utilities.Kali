@@ -1,0 +1,20 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "KarolK72.Utilities.Kali.Library.Protos";
+
+package KarolK72Logging;
+
+service LoggingGRPCServerService{
+	rpc EstablishConnection(InitialConnectionRequest) returns (InitialConnectionResponse);
+}
+
+message InitialConnectionRequest{
+	string FriendlySourceName = 1;
+	string GuidIdentifier = 2;
+	int32 InstanceID = 3;
+}
+
+message InitialConnectionResponse{
+	bool Succesfull = 1;
+	string Key = 2;
+}
