@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KarolK72.Utilities.Kali.Lib
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KarolK72.Utilities.Kali.Extensions", "KarolK72.Utilities.Kali.Extensions\KarolK72.Utilities.Kali.Extensions.csproj", "{7FA9D65F-E566-429A-A32F-FADD3BEE1237}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestingLoggingClient", "TestingLoggingClient\TestingLoggingClient.csproj", "{D18ED920-7701-48DC-A2BB-F1CE694DAB03}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestingLoggingServer", "TestingLoggingServer\TestingLoggingServer.csproj", "{53E73970-AA89-447C-B2C6-F0437FDE58B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{7FA9D65F-E566-429A-A32F-FADD3BEE1237}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FA9D65F-E566-429A-A32F-FADD3BEE1237}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FA9D65F-E566-429A-A32F-FADD3BEE1237}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D18ED920-7701-48DC-A2BB-F1CE694DAB03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D18ED920-7701-48DC-A2BB-F1CE694DAB03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D18ED920-7701-48DC-A2BB-F1CE694DAB03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D18ED920-7701-48DC-A2BB-F1CE694DAB03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53E73970-AA89-447C-B2C6-F0437FDE58B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53E73970-AA89-447C-B2C6-F0437FDE58B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53E73970-AA89-447C-B2C6-F0437FDE58B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53E73970-AA89-447C-B2C6-F0437FDE58B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

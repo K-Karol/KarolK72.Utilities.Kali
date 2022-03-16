@@ -1,6 +1,7 @@
 ﻿using KarolK72.Utilities.Kali.Library.Models;
 using KarolK72.Utilities.Kali.Library.Protos;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace KarolK72.Utilities.Kali.Library.Services
     {
         private ConcurrentDictionary<string, LoggerClientInfo> _loggerClients = new ConcurrentDictionary<string, LoggerClientInfo>();
 
+        //private StringBuilder _loggerStringBuilder = new StringBuilder();
+
         public LoggingAggregatorService()
         {
         }
@@ -25,13 +28,13 @@ namespace KarolK72.Utilities.Kali.Library.Services
             string key = ComputeSha256Hash(identifier);
             if (_loggerClients.ContainsKey(key))
             {
-                return Task.FromResult(new InitialConnectionResponse() { Succesfull = false });
+                return Task.FromResult(new InitialConnectionResponse() { Succesful = false });
             }
 
             var loggerClientInfo = new LoggerClientInfo() { SourceName = request.FriendlySourceName, Key = key }; //add salt??
 
             bool success = _loggerClients.TryAdd(key, loggerClientInfo);
-            return Task.FromResult(new InitialConnectionResponse() { Succesfull = success, Key = success ? loggerClientInfo.Key : null });
+            return Task.FromResult(new InitialConnectionResponse() { Succesful = success, Key = success ? loggerClientInfo.Key : null });
         }
 
         public Task LogMessage(string message)
@@ -56,6 +59,61 @@ namespace KarolK72.Utilities.Kali.Library.Services
                 }
                 return builder.ToString();
             }
+        }
+
+        public Task<LogResponse> Log(LogRequest request)
+        {
+            if(string.IsNullOrWhiteSpace(request.Key) || !_loggerClients.TryGetValue(request.Key, out LoggerClientInfo lci))
+            {
+                return Task.FromResult(new LogResponse() { Succesful = false });
+            }
+
+            StringBuilder loggerStringBuilder = new StringBuilder();
+
+            loggerStringBuilder.Append($"[{DateTime.Now:s}]");
+            loggerStringBuilder.Append($"[{lci.SourceName}]");
+            loggerStringBuilder.Append($"[{request.Category}]");
+            LogLevel logLevel = (LogLevel)request.LogLevel;
+            switch (logLevel)
+            {
+                case LogLevel.Trace:
+                    loggerStringBuilder.Append("[Trace]");
+                    break;
+                case LogLevel.Debug:
+                    loggerStringBuilder.Append("[Debug]");
+                    break;
+                case LogLevel.Information:
+                    loggerStringBuilder.Append("[Info ]");
+                    break;
+                case LogLevel.Warning:
+                    loggerStringBuilder.Append("[Warn ]");
+                    break;
+                case LogLevel.Error:
+                    loggerStringBuilder.Append("[Error]");
+                    break;
+                case LogLevel.Critical:
+                    loggerStringBuilder.Append("[Crit ]");
+                    break;
+                case LogLevel.None:
+                    loggerStringBuilder.Append("[     ]");
+                    break;
+                default:
+                    loggerStringBuilder.Append("[     ]");
+                    break;
+            }
+
+            string[] scopes = System.Text.Json.JsonSerializer.Deserialize<string[]>(request.Scopes) ?? new string[0];
+            loggerStringBuilder.Append($"[{string.Join(">>>", scopes)}]");
+            loggerStringBuilder.Append($" {request.RenderedMessage}");
+            Exception? exception = System.Text.Json.JsonSerializer.Deserialize<Exception>(request.Exception) ?? null;
+
+            if(exception != null)
+            {
+                loggerStringBuilder.Append($"{Environment.NewLine}{exception}");
+            }
+            Console.WriteLine(loggerStringBuilder.ToString());
+
+            return Task.FromResult(new LogResponse() { Succesful = true });
         }
     }
 }

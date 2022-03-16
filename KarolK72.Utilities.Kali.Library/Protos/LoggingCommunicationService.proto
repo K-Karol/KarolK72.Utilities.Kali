@@ -6,6 +6,7 @@ package KarolK72Logging;
 
 service LoggingGRPCServerService{
 	rpc EstablishConnection(InitialConnectionRequest) returns (InitialConnectionResponse);
+	rpc SendLog(LogRequest) returns (LogResponse);
 }
 
 message InitialConnectionRequest{
@@ -15,6 +16,21 @@ message InitialConnectionRequest{
 }
 
 message InitialConnectionResponse{
-	bool Succesfull = 1;
+	bool Succesful = 1;
 	string Key = 2;
+}
+
+message LogRequest{
+	string Key = 1;
+	int32 LogLevel = 2;
+	string Category = 3;
+	int32 EventId = 4;
+	string EventName = 5;
+	string Exception = 6;
+	string Scopes = 7;
+	string RenderedMessage = 8;
+}
+
+message LogResponse{
+	bool Succesful = 1;
 }

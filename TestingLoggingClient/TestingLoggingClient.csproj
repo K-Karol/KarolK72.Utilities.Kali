@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KarolK72.Utilities.Kali.Extensions\KarolK72.Utilities.Kali.Extensions.csproj" />
+    <ProjectReference Include="..\KarolK72.Utilities.Kali.Library\KarolK72.Utilities.Kali.Library.csproj" />
+  </ItemGroup>
+
+</Project>

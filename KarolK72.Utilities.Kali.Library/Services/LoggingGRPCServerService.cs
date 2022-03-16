@@ -24,8 +24,6 @@ namespace KarolK72.Utilities.Kali.Library.Services
         public override Task<InitialConnectionResponse> EstablishConnection(InitialConnectionRequest request, ServerCallContext context)
             => _loggingAggregatorService.EstablishClient(request);
 
-
-
-
+        public override Task<LogResponse> SendLog(LogRequest request, ServerCallContext context) => _loggingAggregatorService.Log(request);
     }
 }
