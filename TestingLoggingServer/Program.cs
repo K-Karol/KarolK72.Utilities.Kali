@@ -1,4 +1,5 @@
-using KarolK72.Utilities.Kali.Library.Services;
+using KarolK72.Utilities.Kali.Common;
+using KarolK72.Utilities.Kali.Server.Library.Services;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using System.Net;
 
@@ -23,15 +24,21 @@ IHost host = Host.CreateDefaultBuilder(args)
                 listenOptions.UseHttps(".\\dev_cert.pfx",
                     "karol");
             });
+            options.Listen(IPAddress.Any, 5000, listenOptions =>
+             {
+                 listenOptions.Protocols = HttpProtocols.Http1;
+             });
         });
         webBuilder.UseContentRoot(AppDomain.CurrentDomain.BaseDirectory);
         //webBuilder.UseUrls(url);
         webBuilder.Configure(appBuilder =>
         {
+            
             appBuilder.UseRouting();
+            appBuilder.UseGrpcWeb();
             appBuilder.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<LoggingGRPCServerService>();
+                endpoints.MapGrpcService<KaliServerService>().EnableGrpcWeb();
             });
         });
 

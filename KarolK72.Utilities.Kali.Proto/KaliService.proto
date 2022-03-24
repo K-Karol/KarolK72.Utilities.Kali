@@ -1,10 +1,10 @@
 ﻿syntax = "proto3";
 
-option csharp_namespace = "KarolK72.Utilities.Kali.Library.Protos";
+option csharp_namespace = "KarolK72.Utilities.Kali.Proto";
 
-package KarolK72Logging;
+package kali;
 
-service LoggingGRPCServerService{
+service KaliService{
 	rpc EstablishConnection(InitialConnectionRequest) returns (InitialConnectionResponse);
 	rpc SendLog(LogRequest) returns (LogResponse);
 }

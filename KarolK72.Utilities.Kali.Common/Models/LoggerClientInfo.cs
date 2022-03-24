@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KarolK72.Utilities.Kali.Library.Models
+namespace KarolK72.Utilities.Kali.Common.Models
 {
     public class LoggerClientInfo
     {

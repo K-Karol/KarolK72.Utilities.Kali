@@ -1,6 +1,7 @@
-﻿using KarolK72.Utilities.Kali.Library.Protos;
+﻿using KarolK72.Utilities.Kali.Proto;
+using System.Threading.Tasks;
 
-namespace KarolK72.Utilities.Kali.Library.Services
+namespace KarolK72.Utilities.Kali.Common
 {
     public interface ILoggingAggregatorService
     {

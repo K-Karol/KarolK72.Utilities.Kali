@@ -1,6 +1,6 @@
-﻿using KarolK72.Utilities.Kali.Library.Models;
-using KarolK72.Utilities.Kali.Library.Protos;
-using Microsoft.Extensions.Hosting;
+﻿using KarolK72.Utilities.Kali.Common;
+using KarolK72.Utilities.Kali.Common.Models;
+using KarolK72.Utilities.Kali.Proto;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
@@ -10,7 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KarolK72.Utilities.Kali.Library.Services
+namespace KarolK72.Utilities.Kali.Server.Library.Services
 {
     public class LoggingAggregatorService : ILoggingAggregatorService
     {
@@ -63,7 +63,7 @@ namespace KarolK72.Utilities.Kali.Library.Services
 
         public Task<LogResponse> Log(LogRequest request)
         {
-            if(string.IsNullOrWhiteSpace(request.Key) || !_loggerClients.TryGetValue(request.Key, out LoggerClientInfo lci))
+            if (string.IsNullOrWhiteSpace(request.Key) || !_loggerClients.TryGetValue(request.Key, out LoggerClientInfo lci))
             {
                 return Task.FromResult(new LogResponse() { Succesful = false });
             }
@@ -107,7 +107,7 @@ namespace KarolK72.Utilities.Kali.Library.Services
             loggerStringBuilder.Append($" {request.RenderedMessage}");
             Exception? exception = System.Text.Json.JsonSerializer.Deserialize<Exception>(request.Exception) ?? null;
 
-            if(exception != null)
+            if (exception != null)
             {
                 loggerStringBuilder.Append($"{Environment.NewLine}{exception}");
             }

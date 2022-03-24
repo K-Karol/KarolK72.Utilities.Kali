@@ -1,13 +1,17 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Grpc.Net.Client;
+using Grpc.Net.Client.Web;
+using KarolK72.Utilities.Kali.Client.Library;
+using KarolK72.Utilities.Kali.Proto;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using KarolK72.Utilities.Kali.Library.Services;
-using Grpc.Net.Client;
 
 namespace KarolK72.Utilities.Kali.Extensions
 {
@@ -17,7 +21,7 @@ namespace KarolK72.Utilities.Kali.Extensions
         private readonly IOptionsMonitor<KaliLoggerOptions> _options;
         private readonly ConcurrentDictionary<string, KaliLogger> _loggers;
         private readonly KaliLogProcessor _messageQueue;
-        private readonly LoggingGRPCClientService _client;
+        private readonly KaliClientService _client;
 
         private IDisposable _optionsReloadToken;
         private IExternalScopeProvider _scopeProvider = NullExternalScopeProvider.Instance;
@@ -26,15 +30,28 @@ namespace KarolK72.Utilities.Kali.Extensions
         public KaliLoggerProvider(IOptionsMonitor<KaliLoggerOptions> options)
         {
             _options = options;
-            var httpHandler = new HttpClientHandler();
+            HttpMessageHandler httpHandler = null;
+#if NETCOREAPP3_0_OR_GREATER || NET5_0_OR_GREATER
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+            httpHandler = handler;
             // Return `true` to allow certificates that are untrusted/invalid
-            httpHandler.ServerCertificateCustomValidationCallback =
-                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-            GrpcChannel channel = GrpcChannel.ForAddress($"{options.CurrentValue.IPAddress}:{options.CurrentValue.Port}", new GrpcChannelOptions { HttpHandler = httpHandler });
+            
+#else
+            var innerHandler = new HttpClientHandler();
+            innerHandler.ServerCertificateCustomValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+            var handler = new GrpcWebHandler(innerHandler);
+            httpHandler = handler;
+#endif
 
-            _client = new LoggingGRPCClientService(channel);
+            GrpcChannel channel = GrpcChannel.ForAddress($"{options.CurrentValue.IPAddress}:{options.CurrentValue.Port}", new GrpcChannelOptions
+            {
+                HttpHandler = httpHandler
+            });
 
-            var success = _client.EstablishConnection(new Library.Protos.InitialConnectionRequest() { FriendlySourceName = options.CurrentValue.SourceName, GuidIdentifier = options.CurrentValue.SourceGUID.ToString(), InstanceID = 0 });
+            _client = new KaliClientService(channel);
+
+            var success = _client.EstablishConnection(new InitialConnectionRequest() { FriendlySourceName = options.CurrentValue.SourceName, GuidIdentifier = options.CurrentValue.SourceGUID.ToString(), InstanceID = 0 });
 
             if (!success)
                 throw new Exception("Could not establish connection to the Kali logging service");
@@ -86,4 +103,6 @@ namespace KarolK72.Utilities.Kali.Extensions
             }
         }
     }
+
+
 }
