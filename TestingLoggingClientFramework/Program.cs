@@ -32,6 +32,7 @@ namespace TestingLoggingClientFramework
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
+            //can cause an exception. need to rethink this
             var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
 
             logger.LogInformation("Test log");
