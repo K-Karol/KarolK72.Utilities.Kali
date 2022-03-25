@@ -3,13 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KarolK72.Utilities.Kali.Library", "KarolK72.Utilities.Kali.Library\KarolK72.Utilities.Kali.Library.csproj", "{8C5F0EA1-8464-49C4-B458-62B57E351A68}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KarolK72.Utilities.Kali.Extensions", "KarolK72.Utilities.Kali.Extensions\KarolK72.Utilities.Kali.Extensions.csproj", "{7FA9D65F-E566-429A-A32F-FADD3BEE1237}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestingLoggingClient", "TestingLoggingClient\TestingLoggingClient.csproj", "{D18ED920-7701-48DC-A2BB-F1CE694DAB03}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestingLoggingServer", "TestingLoggingServer\TestingLoggingServer.csproj", "{53E73970-AA89-447C-B2C6-F0437FDE58B1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KarolK72.Utilities.Kali.Common", "KarolK72.Utilities.Kali.Common\KarolK72.Utilities.Kali.Common.csproj", "{438AAF8E-18BA-4192-9CD3-BA15A8885A9E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{BFC1E1DB-D907-44D7-91D7-AFFDA3429021}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{6C318CAD-5995-49F6-997E-DBBDC0A4B7AF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KarolK72.Utilities.Kali.Client.Library", "KarolK72.Utilities.Kali.Client.Library\KarolK72.Utilities.Kali.Client.Library.csproj", "{62D36CFC-358B-463D-BA3F-8FD56934A38E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KarolK72.Utilities.Kali.Server.Library", "KarolK72.Utilities.Kali.Server.Library\KarolK72.Utilities.Kali.Server.Library.csproj", "{66C87921-166C-45EC-9FAC-88CC93FCB6B6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KarolK72.Utilities.Kali.Proto", "KarolK72.Utilities.Kali.Proto\KarolK72.Utilities.Kali.Proto.csproj", "{494ACC8E-A96C-4B89-8425-7E82B815D379}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{C083751C-2E1B-450B-B62F-6ECD3CAAD163}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLoggingClientFramework", "TestLoggingClientFramework\TestLoggingClientFramework.csproj", "{C7131FE5-DA51-4D43-9ABE-C93B2378E2C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +31,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8C5F0EA1-8464-49C4-B458-62B57E351A68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C5F0EA1-8464-49C4-B458-62B57E351A68}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C5F0EA1-8464-49C4-B458-62B57E351A68}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8C5F0EA1-8464-49C4-B458-62B57E351A68}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7FA9D65F-E566-429A-A32F-FADD3BEE1237}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7FA9D65F-E566-429A-A32F-FADD3BEE1237}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FA9D65F-E566-429A-A32F-FADD3BEE1237}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,9 +43,36 @@ Global
 		{53E73970-AA89-447C-B2C6-F0437FDE58B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53E73970-AA89-447C-B2C6-F0437FDE58B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53E73970-AA89-447C-B2C6-F0437FDE58B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{438AAF8E-18BA-4192-9CD3-BA15A8885A9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{438AAF8E-18BA-4192-9CD3-BA15A8885A9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{438AAF8E-18BA-4192-9CD3-BA15A8885A9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{438AAF8E-18BA-4192-9CD3-BA15A8885A9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62D36CFC-358B-463D-BA3F-8FD56934A38E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62D36CFC-358B-463D-BA3F-8FD56934A38E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62D36CFC-358B-463D-BA3F-8FD56934A38E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62D36CFC-358B-463D-BA3F-8FD56934A38E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66C87921-166C-45EC-9FAC-88CC93FCB6B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66C87921-166C-45EC-9FAC-88CC93FCB6B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66C87921-166C-45EC-9FAC-88CC93FCB6B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66C87921-166C-45EC-9FAC-88CC93FCB6B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{494ACC8E-A96C-4B89-8425-7E82B815D379}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{494ACC8E-A96C-4B89-8425-7E82B815D379}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{494ACC8E-A96C-4B89-8425-7E82B815D379}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{494ACC8E-A96C-4B89-8425-7E82B815D379}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7131FE5-DA51-4D43-9ABE-C93B2378E2C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7131FE5-DA51-4D43-9ABE-C93B2378E2C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7131FE5-DA51-4D43-9ABE-C93B2378E2C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7131FE5-DA51-4D43-9ABE-C93B2378E2C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D18ED920-7701-48DC-A2BB-F1CE694DAB03} = {C083751C-2E1B-450B-B62F-6ECD3CAAD163}
+		{53E73970-AA89-447C-B2C6-F0437FDE58B1} = {C083751C-2E1B-450B-B62F-6ECD3CAAD163}
+		{62D36CFC-358B-463D-BA3F-8FD56934A38E} = {BFC1E1DB-D907-44D7-91D7-AFFDA3429021}
+		{66C87921-166C-45EC-9FAC-88CC93FCB6B6} = {6C318CAD-5995-49F6-997E-DBBDC0A4B7AF}
+		{C7131FE5-DA51-4D43-9ABE-C93B2378E2C7} = {C083751C-2E1B-450B-B62F-6ECD3CAAD163}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {66DEFC15-0E2F-4A2D-82AE-8E999B099FF6}

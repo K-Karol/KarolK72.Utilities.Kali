@@ -5,14 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-namespace TestingLoggingClientFramework
+
+namespace TestLoggingClientFramework
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-
             IServiceCollection serviceCollection = new ServiceCollection();
 
             serviceCollection.AddLogging((lg) =>
@@ -41,6 +42,7 @@ namespace TestingLoggingClientFramework
             {
                 using (logger.BeginScope("Another scope"))
                 {
+                    Thread.Sleep(1000);
                     logger.LogWarning("Inside of 2 scopes at {dt}", DateTime.Now.ToString("s"));
 
                 }
@@ -48,11 +50,15 @@ namespace TestingLoggingClientFramework
                 logger.LogWarning("Inside of inner scope");
             }
 
+
+            Thread.Sleep(3000);
+
             logger.LogWarning("Out!");
 
             logger.LogError(new Exception("Oof"), "Test log!");
 
             serviceProvider.Dispose();
+
 
         }
     }

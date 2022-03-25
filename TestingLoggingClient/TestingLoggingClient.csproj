@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KarolK72.Utilities.Kali.Extensions\KarolK72.Utilities.Kali.Extensions.csproj" />
-    <ProjectReference Include="..\KarolK72.Utilities.Kali.Library\KarolK72.Utilities.Kali.Library.csproj" />
   </ItemGroup>
 
 </Project>
