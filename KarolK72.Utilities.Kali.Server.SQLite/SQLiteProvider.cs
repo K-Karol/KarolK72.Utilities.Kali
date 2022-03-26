@@ -1,39 +1,35 @@
-﻿using KarolK72.Utilities.Kali.Server.Library.Models;
-using KarolK72.Utilities.Kali.Server.Library.Services;
-using Microsoft.Extensions.Logging;
-using Npgsql;
+﻿using KarolK72.Utilities.Kali.Server.Library.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.SQLite;
 using System.Data;
+using KarolK72.Utilities.Kali.Server.Library.Models;
 using Dapper;
 
-namespace KarolK72.Utilities.Kali.Server.PostgreSQL
+namespace KarolK72.Utilities.Kali.Server.SQLite
 {
-    public class PostgreSQLProvider : ISqlProvider
+    public class SQLiteProvider : ISqlProvider
     {
-        private readonly NpgsqlConnection _connection;
+        private readonly SQLiteConnection _connection;
         private bool disposedValue;
-        private NpgsqlTransaction _transaction;
-
+        private SQLiteTransaction _transaction;
         public IDbTransaction BeginTransaction()
         {
             _transaction = _connection.BeginTransaction();
             return _transaction;
         }
-
-        //public void CommitTranscation()
-        //{
-        //    _transaction.Commit();
-        //}
-
-        public PostgreSQLProvider(NpgsqlConnection connection!!)
+        public SQLiteProvider(SQLiteConnection connection)
         {
             _connection = connection;
         }
-
         private const string InsertLogSQL = @"  INSERT INTO KaliLogs(
                                                     LogLevel, Category, EventID, EventName, RenderedMessage, Scopes, ExceptionJSON, DateTimeCreated, DateTimeModified, RowVer
                                                     )
                                                 VALUES(
-	                                                @LogLevel, @Category, @EventID, @EventName, @RenderedMessage, @Scopes, @ExceptionJSON, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, @RowVer
+	                                                @LogLevel, @Category, @EventID, @EventName, @RenderedMessage, @Scopes, @ExceptionJSON, datetime('now'), datetime('now'), @RowVer
                                                 ) RETURNING *";
 
         public KaliLog InsertLog(KaliLog log)
@@ -83,7 +79,7 @@ namespace KarolK72.Utilities.Kali.Server.PostgreSQL
                 {
                     // TODO: dispose managed state (managed objects)
 
-                    if(_transaction != null)
+                    if (_transaction != null)
                     {
                         try
                         {
@@ -91,7 +87,7 @@ namespace KarolK72.Utilities.Kali.Server.PostgreSQL
                         }
                         catch { }
                         finally
-                        {   
+                        {
                             _transaction.Dispose();
                         }
                     }
@@ -110,7 +106,5 @@ namespace KarolK72.Utilities.Kali.Server.PostgreSQL
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
-
-        
     }
 }

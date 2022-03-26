@@ -120,6 +120,8 @@ namespace KarolK72.Utilities.Kali.Server.Library.Services
                 EventID = request.EventId,
                 LogLevel = (LogLevel)request.LogLevel,
                 EventName = request.EventName,
+                RenderedMessage = request.RenderedMessage,
+                ExceptionJSON = request.Exception,
                 Scopes = request.Scopes
             };
 

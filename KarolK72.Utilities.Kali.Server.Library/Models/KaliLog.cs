@@ -12,33 +12,38 @@ namespace KarolK72.Utilities.Kali.Server.Library.Models
     [Table("KaliLogs")]
     public class KaliLog
     {
-        public ulong KaliLogID { get; set; }
+        public long KaliLogID { get; set; }
         public LogLevel LogLevel { get; set; }
         public string? Category { get; set; }
         //public EventId EventId { get; set; }
         public int EventID { get; set; }
         public string? EventName { get; set; }
-        
-        public string Scopes { get; set; }
-
-        private string _exceptionJSON;
-        public string ExceptionJSON
+        public string RenderedMessage { get; set; }
+        public string? Scopes { get; set; }
+        public string? ExceptionJSON
         {
-            get => _exceptionJSON;
+            get
+            {
+                if (Exception != null)
+                    return System.Text.Json.JsonSerializer.Serialize(Exception);
+                else
+                    return null;
+            }
             set
             {
-                _exceptionJSON = value;
-                if (!string.IsNullOrWhiteSpace(_exceptionJSON))
+                if (!string.IsNullOrWhiteSpace(value))
                 {
                     try
                     {
-                        Exception = System.Text.Json.JsonSerializer.Deserialize<Exception>(_exceptionJSON) as Exception;
+                        Exception = System.Text.Json.JsonSerializer.Deserialize<Exception?>(value);
                     }
                     catch
                     {
                         Exception = null;
                     }
                 }
+                else
+                    Exception = null;
             }
         }
 

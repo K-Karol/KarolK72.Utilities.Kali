@@ -18,6 +18,8 @@
     <ProjectReference Include="..\KarolK72.Utilities.Kali.Proto\KarolK72.Utilities.Kali.Proto.csproj" />
     <ProjectReference Include="..\KarolK72.Utilities.Kali.Server.Library\KarolK72.Utilities.Kali.Server.Library.csproj" />
     <ProjectReference Include="..\KarolK72.Utilities.Kali.Server.PostgreSQL\KarolK72.Utilities.Kali.Server.PostgreSQL.csproj" />
+    <ProjectReference Include="..\KarolK72.Utilities.Kali.Server.SQLite\KarolK72.Utilities.Kali.Server.SQLite.csproj" />
+    <ProjectReference Include="..\KarolK72.Utilities.Kali.Server.SQLServer\KarolK72.Utilities.Kali.Server.SQLServer.csproj" />
   </ItemGroup>
 
 </Project>
