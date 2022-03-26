@@ -1,26 +1,32 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	<TargetFrameworks>netstandard2.0;net6.0;net461</TargetFrameworks>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-	  <LangVersion>latest</LangVersion>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;net6.0;net461</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Authors>Karol Kierzkowski</Authors>
+		<Description>This package contains the extensions for Microsoft.Extensions.Logging for implementing a KaliLogger (ILogger).</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<PackageOutputPath>$(SolutionDir)Packages_$(Configuration)\</PackageOutputPath>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Grpc.Net.Client" Version="2.43.0" />
-    <PackageReference Include="Grpc.Net.Client.Web" Version="2.44.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="6.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="System.Net.Http.WinHttpHandler" Version="6.0.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Grpc.Net.Client" Version="2.43.0" />
+		<PackageReference Include="Grpc.Net.Client.Web" Version="2.44.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="6.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="System.Net.Http.WinHttpHandler" Version="6.0.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\KarolK72.Utilities.Kali.Client.Library\KarolK72.Utilities.Kali.Client.Library.csproj" />
-    <ProjectReference Include="..\KarolK72.Utilities.Kali.Common\KarolK72.Utilities.Kali.Common.csproj" />
-    <ProjectReference Include="..\KarolK72.Utilities.Kali.Proto\KarolK72.Utilities.Kali.Proto.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\KarolK72.Utilities.Kali.Client.Library\KarolK72.Utilities.Kali.Client.Library.csproj" />
+		<ProjectReference Include="..\KarolK72.Utilities.Kali.Common\KarolK72.Utilities.Kali.Common.csproj" />
+		<ProjectReference Include="..\KarolK72.Utilities.Kali.Proto\KarolK72.Utilities.Kali.Proto.csproj" />
+	</ItemGroup>
 
 </Project>

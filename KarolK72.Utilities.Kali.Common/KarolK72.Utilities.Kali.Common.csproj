@@ -3,6 +3,12 @@
   <PropertyGroup>
 	  <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
 	  <LangVersion>latest</LangVersion>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <Authors>Karol Kierzkowski</Authors>
+	  <Description>This package contains core classes and abstractions.</Description>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+	  <PackageOutputPath>$(SolutionDir)Packages_$(Configuration)\</PackageOutputPath>
   </PropertyGroup>
 
   <ItemGroup>

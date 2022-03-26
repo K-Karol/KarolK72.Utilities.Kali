@@ -7,7 +7,7 @@ using KarolK72.Utilities.Kali.Server.SQLServer;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using System.Data;
 using System.Net;
-
+using System;
 
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>

@@ -25,7 +25,7 @@ namespace KarolK72.Utilities.Kali.Server.Library.Models
             get
             {
                 if (Exception != null)
-                    return System.Text.Json.JsonSerializer.Serialize(Exception);
+                    return Newtonsoft.Json.JsonConvert.SerializeObject(Exception);
                 else
                     return null;
             }
@@ -35,7 +35,7 @@ namespace KarolK72.Utilities.Kali.Server.Library.Models
                 {
                     try
                     {
-                        Exception = System.Text.Json.JsonSerializer.Deserialize<Exception?>(value);
+                        Exception = Newtonsoft.Json.JsonConvert.DeserializeObject<Exception?>(value!);
                     }
                     catch
                     {

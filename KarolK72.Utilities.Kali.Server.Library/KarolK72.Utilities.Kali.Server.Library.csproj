@@ -1,21 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;net461;net6.0</TargetFrameworks>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Authors>Karol Kierzkowski</Authors>
+		<Description>This is the code library for any server-side code for the Kali project</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<PackageOutputPath>$(SolutionDir)Packages_$(Configuration)\</PackageOutputPath>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.0.123" />
-    <PackageReference Include="Dapper.Contrib" Version="2.0.78" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Dapper" Version="2.0.123" />
+		<PackageReference Include="Dapper.Contrib" Version="2.0.78" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Data\KarolK72.Data.Common\KarolK72.Data.Common.csproj" />
-    <ProjectReference Include="..\KarolK72.Utilities.Kali.Common\KarolK72.Utilities.Kali.Common.csproj" />
-    <ProjectReference Include="..\KarolK72.Utilities.Kali.Proto\KarolK72.Utilities.Kali.Proto.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Data\KarolK72.Data.Common\KarolK72.Data.Common.csproj" />
+		<ProjectReference Include="..\KarolK72.Utilities.Kali.Common\KarolK72.Utilities.Kali.Common.csproj" />
+		<ProjectReference Include="..\KarolK72.Utilities.Kali.Proto\KarolK72.Utilities.Kali.Proto.csproj" />
+	</ItemGroup>
 
 </Project>
