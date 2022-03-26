@@ -1,0 +1,12 @@
+﻿CREATE TABLE KaliLogs(
+	KaliLogID BIGSERIAL PRIMARY KEY NOT NULL,
+	LogLevel INTEGER NOT NULL,
+	Category TEXT,
+	EventID INTEGER,
+	EventName TEXT,
+	Scopes TEXT,
+	ExceptionJSON TEXT,
+	DateTimeCreated TIMESTAMP NOT NULL,
+	DateTimeModified TIMESTAMP NOT NULL,
+	RowVer INT NOT NULL
+)

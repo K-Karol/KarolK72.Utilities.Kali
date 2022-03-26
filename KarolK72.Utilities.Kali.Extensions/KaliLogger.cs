@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
+using KarolK72.Utilities.Kali.Client.Library.Models;
 
 namespace KarolK72.Utilities.Kali.Extensions
 {

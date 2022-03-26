@@ -13,9 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Data\KarolK72.Data.Common\KarolK72.Data.Common.csproj" />
     <ProjectReference Include="..\KarolK72.Utilities.Kali.Common\KarolK72.Utilities.Kali.Common.csproj" />
     <ProjectReference Include="..\KarolK72.Utilities.Kali.Proto\KarolK72.Utilities.Kali.Proto.csproj" />
     <ProjectReference Include="..\KarolK72.Utilities.Kali.Server.Library\KarolK72.Utilities.Kali.Server.Library.csproj" />
+    <ProjectReference Include="..\KarolK72.Utilities.Kali.Server.PostgreSQL\KarolK72.Utilities.Kali.Server.PostgreSQL.csproj" />
   </ItemGroup>
 
 </Project>

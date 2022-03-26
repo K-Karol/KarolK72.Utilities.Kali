@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using KarolK72.Utilities.Kali.Client.Library;
+using KarolK72.Utilities.Kali.Client.Library.Models;
+using KarolK72.Utilities.Kali.Client.Library.Services;
 using KarolK72.Utilities.Kali.Proto;
 
 namespace KarolK72.Utilities.Kali.Extensions

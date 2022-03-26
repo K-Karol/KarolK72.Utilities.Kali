@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KarolK72.Utilities.Kali.Client.Library
+namespace KarolK72.Utilities.Kali.Client.Library.Services
 {
     public class KaliClientService : KaliService.KaliServiceClient
     {

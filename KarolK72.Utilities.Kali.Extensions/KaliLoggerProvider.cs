@@ -1,6 +1,6 @@
 ﻿using Grpc.Net.Client;
 using Grpc.Net.Client.Web;
-using KarolK72.Utilities.Kali.Client.Library;
+using KarolK72.Utilities.Kali.Client.Library.Services;
 using KarolK72.Utilities.Kali.Proto;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -79,6 +79,7 @@ namespace KarolK72.Utilities.Kali.Extensions
 
         private void ReloadLoggerOptions(KaliLoggerOptions options)
         {
+
             foreach (KeyValuePair<string, KaliLogger> logger in _loggers)
             {
                 logger.Value.Options = options;
