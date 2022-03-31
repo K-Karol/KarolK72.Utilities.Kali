@@ -1,0 +1,73 @@
+﻿@using KarolK72.Data.Common
+@using KarolK72.Utilities.Kali.Server.Library.Services
+@inject IUnitOfWorkFactory<ISqlProvider> _unitOfWorkFactory
+
+@if (_vm?.ShowDialog ?? false)
+{
+    <div class="modal fade show d-block" id="exampleModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="titleLabel">Add Employee</h5>
+                </div>
+                <div class="modal-body">
+                    <EditForm Model="@_vm.Application" OnValidSubmit="@HandleValidSubmit">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+                        <div class="form-group">
+                            <label for="appname">Application name: </label>
+                            <InputText id="appname" class="form-control" @bind-Value="@_vm.Application.ApplicationName" placeholder="Enter application name"></InputText>
+                            <ValidationMessage For="@(() => _vm.Application.ApplicationName)" />
+                        </div>
+                        <div class="form-group">
+                            <label for="appGuid">Application GUID: </label>
+                            <InputText id="appGuid" class="form-control" @bind-Value="@_vm.Application.ApplicationGUID" placeholder="Enter application GUID"></InputText>
+                            <a style="margin-top: 10px;" class="btn btn-primary" @onclick=@(() => _vm.Application.ApplicationGUID = Guid.NewGuid().ToString().ToUpper())>Generate new GUID</a>
+                            <ValidationMessage For="@(() => _vm.Application.ApplicationGUID)" />
+                        </div>
+                        <div style="margin-top: 20px">
+                            <button type="submit" class="btn btn-primary">Create new application</button>
+                            <a class="btn btn-outline-primary" @onclick="@Close">Close</a>
+                        </div>
+
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private ViewModels.AddApplicationDialogViewModel _vm;
+    [Parameter]
+    public EventCallback<bool> CloseEventCallback { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _vm = new ViewModels.AddApplicationDialogViewModel(_unitOfWorkFactory);
+    }
+    public void Show()
+    {
+        ResetDialog();
+        _vm.ShowDialog = true;
+        StateHasChanged();
+    }
+    public void Close()
+    {
+        _vm.ShowDialog = false;
+        StateHasChanged();
+    }
+    private void ResetDialog()
+    {
+        _vm.Application = new ViewModels.ApplicationModel() { ApplicationGUID = Guid.NewGuid().ToString().ToUpper() };
+    }
+    protected async Task HandleValidSubmit()
+    {
+        //await EmployeeDataService.AddEmployee(Employee);
+        await _vm.CreateApplication();
+        _vm.ShowDialog = false;
+        await CloseEventCallback.InvokeAsync(true);
+        StateHasChanged();
+    }
+}

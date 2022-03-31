@@ -136,5 +136,15 @@ namespace KarolK72.Utilities.Kali.Server.SQLite
         {
             throw new NotImplementedException();
         }
+
+        public void DeleteApplication(Application application)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteApplicationAsync(Application application)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

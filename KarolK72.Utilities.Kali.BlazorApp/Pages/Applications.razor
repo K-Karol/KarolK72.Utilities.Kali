@@ -1,14 +1,18 @@
 ﻿@page "/applications"
 @using KarolK72.Data.Common
+@using KarolK72.Utilities.Kali.BlazorApp.ViewModels
 @using KarolK72.Utilities.Kali.Server.Library.Services
 @using Microsoft.Extensions.Primitives
 @using KarolK72.Utilities.Kali.Server.Library.Models
 @using System.Collections.ObjectModel
+@using KarolK72.Utilities.Kali.BlazorApp.Components;
+@using System.Diagnostics
 
 @inject IUnitOfWorkFactory<ISqlProvider> _unitOfWorkFactory
+@inject ILogger<Applications> _logger;
 
-<button class="btn btn-primary">Add new</button>
-
+<button @onclick=@(() => _addApplicationDialog.Show()) class="btn btn-primary">Add new</button>
+<AddApplicationDialog @ref="_addApplicationDialog" CloseEventCallback=AddEmployeeDialog_OnDialogClose></AddApplicationDialog>
 @if (_task.IsCompleted)
 {
     <table class="table table-striped">
@@ -28,8 +32,8 @@
                     <td>@app.ApplicationGUID.ToString("D").ToUpper()</td>
                     <td>@app.DateTimeCreated.ToShortDateString()</td>
                     <td>
-                        <a class="btn btn-primary" href="/applications/@app.ApplicationID">Edit</a>
-                        <a class="btn btn-danger">Delete</a>
+                        <a class="btn btn-primary" @onclick=@(() => _vm.Application = app)>Edit</a>
+                        @*<a class="btn btn-danger">Delete</a>*@
                     </td>
                     @*<td>@verifItem.DiscordUserID</td>
                         <td>@(_discordService.GetHandleFromID(@verifItem.DiscordUserID) ?? (@verifItem.DiscordHandleCache + " [Cached]"))</td>
@@ -37,10 +41,22 @@
                         <td>@(verifItem.IsDraft && !verifItem.IsProcessed ? "Not Submitted" : (!verifItem.IsProcessed ? "Pending Approval" : (verifItem.IsVerified ? "Verified" : "Rejected")))</td>*@
                     @*<td><a class="btn btn-primary" href="/verify/@verifItem.ID">Verify Page</a></td>*@
                 </tr>
-
             }
         </tbody>
     </table>
+
+    @if (_vm.IsApplicationSelected)
+    {
+        <div>
+            <h2>Application options</h2>
+            <h3>Application name: @(_vm.Application.ApplicationName)</h3>
+            <a class="btn btn-primary" @onclick=@(() => _vm.Application = null)>Deselect</a>
+            <a class="btn btn-danger" @onclick=@(async () => await DeleteSelectedApp())>Delete</a>
+        </div>
+    }
+
+
+
 }
 else
 {
@@ -51,6 +67,16 @@ else
 {
     private Task _task;
     private ObservableCollection<Application> _applications = new ObservableCollection<Application>();
+    private ApplicationViewModel _vm;
+
+    private AddApplicationDialog _addApplicationDialog;
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _vm = new ApplicationViewModel(_unitOfWorkFactory);
+    }
 
     protected override async Task OnParametersSetAsync()
     {
@@ -65,5 +91,35 @@ else
 
         });
         await _task;
+    }
+
+    private async void AddEmployeeDialog_OnDialogClose()
+    {
+        using (var uow = _unitOfWorkFactory.CreateNew())
+        {
+            var tmp = await uow.Work.GetAllApplicationsAsync();
+            _applications = new ObservableCollection<Application>(tmp);
+        }
+        StateHasChanged();
+    }
+
+    private async Task DeleteSelectedApp()
+    {
+        Stopwatch stopwath = Stopwatch.StartNew();
+        Stopwatch deleteStopWatch = Stopwatch.StartNew();
+        await _vm.DeleteCurrentApplication();
+        deleteStopWatch.Stop();
+        Stopwatch refreshStopWatch = Stopwatch.StartNew();
+        using (var uow = _unitOfWorkFactory.CreateNew())
+        {
+            var tmp = await uow.Work.GetAllApplicationsAsync();
+            _applications = new ObservableCollection<Application>(tmp);
+        }
+        refreshStopWatch.Stop();
+
+        stopwath.Stop();
+        _logger.LogDebug("Took {t}ms to delete the application and refresh grid. {t2}ms to delete, {t3}ms to update", stopwath.ElapsedMilliseconds,deleteStopWatch.ElapsedMilliseconds, refreshStopWatch.ElapsedMilliseconds);
+
+        StateHasChanged();
     }
 }

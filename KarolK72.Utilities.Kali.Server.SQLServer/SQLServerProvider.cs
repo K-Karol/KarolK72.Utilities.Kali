@@ -108,11 +108,40 @@ namespace KarolK72.Utilities.Kali.Server.SQLServer
         public Application UpdateApplication(Application application)
         {
             throw new NotImplementedException();
+
         }
 
         public Task<Application> UpdateApplicationAsync(Application application)
         {
             throw new NotImplementedException();
+        }
+
+        private const string DeleteApplicationSQL = @"DELETE FROM Applications WHERE ApplicationID = @ApplicationID AND RowVer = @RowVer SELECT @@ROWCOUNT"; //NEED TO HANDLE API KEYS
+
+        public void DeleteApplication(Application application)
+        {
+            int queryResult = _connection.ExecuteScalar<int>(DeleteApplicationSQL, new
+            {
+                ApplicationID = application.ApplicationName,
+                RowVer = application.RowVer
+
+            }, transaction: _transaction);
+
+            if (queryResult == 0)
+                throw new DBConcurrencyException();
+        }
+
+        public async Task DeleteApplicationAsync(Application application)
+        {
+            int queryResult = await _connection.ExecuteScalarAsync<int>(DeleteApplicationSQL, new
+            {
+                ApplicationID = application.ApplicationID,
+                RowVer = application.RowVer
+
+            }, transaction: _transaction);
+
+            if (queryResult == 0)
+                throw new DBConcurrencyException();
         }
 
         private const string SelectAllApplicationsSQL = @"SELECT * FROM Applications";

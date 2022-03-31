@@ -28,11 +28,6 @@ builder.Services.AddSingleton(
         )
     );
 builder.Services.AddSingleton<ILoggingAggregatorService, LoggingAggregatorService>();
-builder.Services.AddLogging(loggingBuilder =>
-{
-    loggingBuilder.SetMinimumLevel(LogLevel.Debug);
-});
-
 builder.WebHost.UseKestrel(webBuilder =>
 {
     webBuilder.Listen(IPAddress.Any, 7001, listenOptions =>
@@ -42,6 +37,7 @@ builder.WebHost.UseKestrel(webBuilder =>
             "karol");
     });
 });
+
 
 var app = builder.Build();
 

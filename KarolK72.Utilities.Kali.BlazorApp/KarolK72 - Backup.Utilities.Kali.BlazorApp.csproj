@@ -16,8 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Common\KarolK72.Common\KarolK72.Common.csproj" />
-    <ProjectReference Include="..\..\..\Data\KarolK72.Data.Common\KarolK72.Data.Common.csproj" />
     <ProjectReference Include="..\KarolK72.Utilities.Kali.Common\KarolK72.Utilities.Kali.Common.csproj" />
     <ProjectReference Include="..\KarolK72.Utilities.Kali.Server.Library\KarolK72.Utilities.Kali.Server.Library.csproj" />
     <ProjectReference Include="..\KarolK72.Utilities.Kali.Server.SQLServer\KarolK72.Utilities.Kali.Server.SQLServer.csproj" />

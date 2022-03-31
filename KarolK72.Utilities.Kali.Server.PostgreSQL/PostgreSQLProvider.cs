@@ -140,5 +140,15 @@ namespace KarolK72.Utilities.Kali.Server.PostgreSQL
         {
             throw new NotImplementedException();
         }
+
+        public void DeleteApplication(Application application)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteApplicationAsync(Application application)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

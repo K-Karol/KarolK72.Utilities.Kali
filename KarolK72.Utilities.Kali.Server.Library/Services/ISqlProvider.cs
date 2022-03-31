@@ -24,6 +24,9 @@ namespace KarolK72.Utilities.Kali.Server.Library.Services
         Models.Application UpdateApplication(Models.Application application);
         Task<Models.Application> UpdateApplicationAsync(Models.Application application);
 
+        void DeleteApplication(Models.Application application);
+        Task DeleteApplicationAsync(Models.Application application);
+
         List<Models.Application> GetAllApplications();
         Task<List<Models.Application>> GetAllApplicationsAsync();
 

@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KarolK72.Utilities.Kali.Ser
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KarolK72.Utilities.Kali.Server.SQLServer", "KarolK72.Utilities.Kali.Server.SQLServer\KarolK72.Utilities.Kali.Server.SQLServer.csproj", "{9D92FD63-46D9-441B-BF82-9A3C650A5CBE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KarolK72.Utilities.Kali.BlazorApp", "KarolK72.Utilities.Kali.BlazorApp\KarolK72.Utilities.Kali.BlazorApp.csproj", "{0A531005-6664-48A0-BAFF-321ED89AE8DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{9D92FD63-46D9-441B-BF82-9A3C650A5CBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D92FD63-46D9-441B-BF82-9A3C650A5CBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D92FD63-46D9-441B-BF82-9A3C650A5CBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A531005-6664-48A0-BAFF-321ED89AE8DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A531005-6664-48A0-BAFF-321ED89AE8DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A531005-6664-48A0-BAFF-321ED89AE8DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A531005-6664-48A0-BAFF-321ED89AE8DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
