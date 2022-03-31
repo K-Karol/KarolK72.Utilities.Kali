@@ -67,6 +67,76 @@ namespace KarolK72.Utilities.Kali.Server.SQLServer
             return queryResult;
         }
 
+        private const string InsertApplicationSQL = @"  INSERT INTO Applications(
+                                                            ApplicationName, ApplicationGUID, DateTimeCreated, DateTimeModified, RowVer
+                                                        )
+                                                        OUTPUT INSERTED.*
+                                                        VALUES(
+                                                            @ApplicationName, @ApplicationGUID, GETDATE(), GETDATE(), 1
+                                                        )";
+
+        public Application InsertApplication(Application application)
+        {
+            Application? queryResult = _connection.QueryFirstOrDefault<Application?>(InsertApplicationSQL, new
+            {
+                ApplicationName = application.ApplicationName,
+                ApplicationGUID = application.ApplicationGUID
+
+            }, transaction: _transaction);
+
+            if (queryResult is null)
+                throw new Exception("Insert query failed. Returned nothing");
+
+            return queryResult;
+        }
+
+        public async Task<Application> InsertApplicationAsync(Application application)
+        {
+            Application? queryResult = await _connection.QueryFirstOrDefaultAsync<Application?>(InsertApplicationSQL, new
+            {
+                ApplicationName = application.ApplicationName,
+                ApplicationGUID = application.ApplicationGUID
+
+            }, transaction: _transaction);
+
+            if (queryResult is null)
+                throw new Exception("Insert query failed. Returned nothing");
+
+            return queryResult;
+        }
+
+        public Application UpdateApplication(Application application)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Application> UpdateApplicationAsync(Application application)
+        {
+            throw new NotImplementedException();
+        }
+
+        private const string SelectAllApplicationsSQL = @"SELECT * FROM Applications";
+
+        public List<Application> GetAllApplications()
+        {
+            List<Application> queryResult = _connection.Query<Application>(SelectAllApplicationsSQL, transaction: _transaction).ToList();
+
+            if (queryResult is null)
+                throw new Exception("Insert query failed. Returned nothing");
+
+            return queryResult;
+        }
+
+        public async Task<List<Application>> GetAllApplicationsAsync()
+        {
+            List<Application> queryResult = (await _connection.QueryAsync<Application>(SelectAllApplicationsSQL, transaction: _transaction)).ToList();
+
+            if (queryResult is null)
+                throw new Exception("Insert query failed. Returned nothing");
+
+            return queryResult;
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -102,6 +172,8 @@ namespace KarolK72.Utilities.Kali.Server.SQLServer
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
+
+        
     }
 }
 

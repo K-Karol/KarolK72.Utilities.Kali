@@ -18,6 +18,14 @@ namespace KarolK72.Utilities.Kali.Server.SQLServer
             {
                 throw new ArgumentNullException(nameof(_options.ConnectionString));
             }
+            try
+            {
+                SqlConnection connection = new SqlConnection(_options.ConnectionString);
+                connection.Open();
+            } catch(Exception ex)
+            {
+                throw new Exception("Could not connect to the SQL database", ex);
+            }
         }
         public ISqlProvider CreateNew()
         {

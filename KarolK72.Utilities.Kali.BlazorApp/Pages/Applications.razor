@@ -1,0 +1,69 @@
+﻿@page "/applications"
+@using KarolK72.Data.Common
+@using KarolK72.Utilities.Kali.Server.Library.Services
+@using Microsoft.Extensions.Primitives
+@using KarolK72.Utilities.Kali.Server.Library.Models
+@using System.Collections.ObjectModel
+
+@inject IUnitOfWorkFactory<ISqlProvider> _unitOfWorkFactory
+
+<button class="btn btn-primary">Add new</button>
+
+@if (_task.IsCompleted)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Application Name</th>
+                <th scope="col">GUID</th>
+                <th scope="col">Date Created</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var app in _applications)
+            {
+                <tr>
+                    <td>@app.ApplicationName</td>
+                    <td>@app.ApplicationGUID.ToString("D").ToUpper()</td>
+                    <td>@app.DateTimeCreated.ToShortDateString()</td>
+                    <td>
+                        <a class="btn btn-primary" href="/applications/@app.ApplicationID">Edit</a>
+                        <a class="btn btn-danger">Delete</a>
+                    </td>
+                    @*<td>@verifItem.DiscordUserID</td>
+                        <td>@(_discordService.GetHandleFromID(@verifItem.DiscordUserID) ?? (@verifItem.DiscordHandleCache + " [Cached]"))</td>
+                        <td>@(string.IsNullOrWhiteSpace(verifItem.MoistType) ? "Not answered" : verifItem.MoistType)</td>
+                        <td>@(verifItem.IsDraft && !verifItem.IsProcessed ? "Not Submitted" : (!verifItem.IsProcessed ? "Pending Approval" : (verifItem.IsVerified ? "Verified" : "Rejected")))</td>*@
+                    @*<td><a class="btn btn-primary" href="/verify/@verifItem.ID">Verify Page</a></td>*@
+                </tr>
+
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p><em>Loading...</em></p>
+}
+
+@code
+{
+    private Task _task;
+    private ObservableCollection<Application> _applications = new ObservableCollection<Application>();
+
+    protected override async Task OnParametersSetAsync()
+    {
+
+        _task = Task.Run(async () =>
+        {
+            using (var uow = _unitOfWorkFactory.CreateNew())
+            {
+                var tmp = await uow.Work.GetAllApplicationsAsync();
+                _applications = new ObservableCollection<Application>(tmp);
+            }
+
+        });
+        await _task;
+    }
+}

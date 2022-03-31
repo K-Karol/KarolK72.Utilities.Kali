@@ -111,6 +111,34 @@ namespace KarolK72.Utilities.Kali.Server.PostgreSQL
             GC.SuppressFinalize(this);
         }
 
-        
+        public Application InsertApplication(Application application)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Application> InsertApplicationAsync(Application application)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Application UpdateApplication(Application application)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Application> UpdateApplicationAsync(Application application)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Application> GetAllApplications()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<Application>> GetAllApplicationsAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
